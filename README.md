@@ -49,9 +49,52 @@ You may wish to fork this repository into your local github account, or you may 
 
 Reach out over email if you have any questions!
 
-### (ADDENDUM: Joe's Notes)
+### ADDENDUM: Joe's Notes/Log
+<hr>
 
 #### Additional dependencies
 - [react router dom](https://reactrouter.com/start/declarative/installation) client side cannonical URLs required for individual reviews.
 - [zod](https://zod.dev/) Good, simple validation library for derived/custom types.
 - [tailwindcss] UI styling.
+
+#### Data
+Taking a look at the API data we can split it up into 2 (so far) types Film and it's subtype Cast.
+
+```json
+{
+    "id": "annie-hall",
+    "title": "Annie Hall",
+    "release_year": 1977,
+    "genres": [
+      "Comedy",
+      "Romance",
+      "Drama"
+    ],
+    "cast": [
+      {
+        "id": "woody-allen",
+        "name": "Woody Allen",
+        "credits": [
+          "Director",
+          "Cast",
+          "Screenplay"
+        ]
+      }, ...
+```
+
+Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
+Component list (based on looking at wireframes)
+
+Data, two hooks.
+- [x] One for pulling in the mubi API data that we will need for search
+- [ ] One for handling the storage of reviews
+  - Because this is a small demo app, we can get away with achieving persitance for our reviews by storing them in local storage (5-10mb per domain), in theroy this could still store hundreds of reviews, especially if the content had a character limit. In reality this would feature would be better served storing our reviews in a DB.
+  
+Application UI will have 2(3) pages. 
+- [ ] Home (search review by genre)
+  - [ ] HomeHeader (open add review modal)
+  - [ ] GenreFilterBar (search film data, already loaded into memory, by genre)
+  - [ ] ReviewCard (Render review sample)
+    NOTE: think about how we want to render review list (pagination? lazy loading?)
+- [ ] Review (each review page has it's own unique URL based on an id)
+- [ ] ReviewForm (user generated reviews, this could be a modal)
