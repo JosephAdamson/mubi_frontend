@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+    --color-mubi-grey: #999999;
+    --color-mubi-blue: #001489;
+}

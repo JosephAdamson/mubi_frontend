@@ -1,17 +1,35 @@
-import mubiLogo from "/logo.svg";
+// for client-side routing
+import { BrowserRouter, Routes, Route } from "react-router";
+import Home from "@/components/Home.js";
+import { useFetchMubiApiData } from "@/hooks/useFetchMubiApiData";
+import ReviewDetail from "./ReviewDetail";
 
-const App = () => (
-  <div
-    className="h-screen flex justify-center items-center border-8 border-black"
-  >
-    <img
-      src={mubiLogo}
-      style={{
-        width: "30vw",
-        minWidth: "200px",
-      }}
-    />
-  </div>
-);
+/* 
+Main application, contains top-level data and routing logic.
+*/
+export default function App() {
+    // bring in our data at the top level.
+    const { mubiApiData, loading, error} = useFetchMubiApiData();
 
-export default App;
+    // jazz these up
+    if (loading) {
+      return <div>loading...</div>
+    }
+
+    if (error) {
+      return <div>{error}</div>
+    }
+
+    if (!mubiApiData) {
+      return <div>failed to fetch data.</div>
+    }
+    
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home films={mubiApiData} />} />
+                <Route path="/reviews/:id" element={<ReviewDetail />}/>
+            </Routes>
+        </BrowserRouter>
+    );
+}

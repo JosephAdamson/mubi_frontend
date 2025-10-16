@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // type(s) defined to be used in-application, I've use snake case here to keep it consistent 
-// with the other, json derived schemas, forgive me.
+// with the other json derived schemas, forgive me.
 export const ReviewSchema = z.object({
     id: z.string(),
     film_id: z.string(),

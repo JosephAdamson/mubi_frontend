@@ -82,6 +82,18 @@ Taking a look at the API data we can split it up into 2 (so far) types Film and 
       }, ...
 ```
 
+MVP
+- [ ] Creation of a film review with review text attribute.
+- [ ] A review can be deleted.
+- [ ] Each review should have its own canonical url.
+- [ ] Films are searchable by the title field.
+- [ ] All reviews are navigable from a single index view.
+  
+EXTRA
+- [ ] The reviews in the index view are filterable by film genre.
+- [ ] Reviews are persisted locally and reconstituted when the application is reopened.
+- [ ] Apply responsive CSS to optimize the layout for the available screen size.
+
 Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
 Component list (based on looking at wireframes)
 
@@ -91,10 +103,10 @@ Data, two hooks.
   - Because this is a small demo app, we can get away with achieving persitance for our reviews by storing them in local storage (5-10mb per domain), in theroy this could still store hundreds of reviews, especially if the content had a character limit. In reality this would feature would be better served storing our reviews in a DB.
   
 Application UI will have 2(3) pages. 
-- [ ] Home (search review by genre)
-  - [ ] HomeHeader (open add review modal)
-  - [ ] GenreFilterBar (search film data, already loaded into memory, by genre)
-  - [ ] ReviewCard (Render review sample)
+- [x] Home (search review by genre)
+  - [x] HomeHeader (open add review modal)
+  - [x] SearchForm (search film data, already loaded into memory)
+  - [x] ReviewCard (Render review sample)
     NOTE: think about how we want to render review list (pagination? lazy loading?)
 - [ ] Review (each review page has it's own unique URL based on an id)
 - [ ] ReviewForm (user generated reviews, this could be a modal)
