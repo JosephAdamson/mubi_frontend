@@ -5,6 +5,11 @@ import ReviewCard from "./ReviewCard";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 
 /* 
+TODO
+- Hook up search
+- Add genre AND film search?
+- Think about loading of card items
+
 Render the main review list view
 */
 export default function Home() {

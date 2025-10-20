@@ -23,5 +23,11 @@ export const FilmWithReviewSchema = z.object({
     createdAt: z.string()
 });
 
+export const AppErrorSchema = z.object({
+    source: z.enum(["mubiApi", "reviews", "unknown"]),
+    message: z.string()
+});
+
 export type Review = z.infer<typeof ReviewSchema>;
 export type FilmWithReview = z.infer<typeof FilmWithReviewSchema>;
+export type AppError = z.infer<typeof AppErrorSchema>;

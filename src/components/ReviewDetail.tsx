@@ -4,6 +4,9 @@ import { LOREM } from "@/constants";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 
 /* 
+TODO
+- Add actual warning messages for errors
+
 Main view for user-generated film review.
 
 @component

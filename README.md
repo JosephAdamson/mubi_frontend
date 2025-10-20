@@ -91,16 +91,17 @@ MVP
   
 EXTRA
 - [ ] The reviews in the index view are filterable by film genre.
-- [ ] Reviews are persisted locally and reconstituted when the application is reopened.
+- [x] Reviews are persisted locally and reconstituted when the application is reopened.
 - [ ] Apply responsive CSS to optimize the layout for the available screen size.
 
 Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
 Component list (based on looking at wireframes)
 
-Data, two hooks.
+Data: two hooks and a context.
 - [x] One for pulling in the mubi API data that we will need for search
-- [ ] One for handling the storage of reviews
+- [x] One for handling the storage of reviews
   - Because this is a small demo app, we can get away with achieving persitance for our reviews by storing them in local storage (5-10mb per domain), in theroy this could still store hundreds of reviews, especially if the content had a character limit. In reality this would feature would be better served storing our reviews in a DB.
+- [x] One context for centralizing, sorting and managing our api and locally stored data.
   
 Application UI will have 2(3) pages. 
 - [x] Home (search review by genre)
