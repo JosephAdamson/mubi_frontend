@@ -3,34 +3,37 @@ import { MubApiDataSchema, type MubiApiData} from "@/types/mubiApi.schema";
 import { z } from "zod";
 import { API_URL } from "@/constants";
 
-// fetch our film data from mubi api
-export function useFetchMubiApiData() {
-    const [mubiApiData, setMubiApiData] = useState<MubiApiData | null>(null);
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+/* 
+Fetch our film data from mubi api.
 
-    // could use useCallback here to cache function (necessary?)
+@hook
+*/
+export default function useFetchMubiApiData() {
+    const [mubiApiData, setMubiApiData] = useState<MubiApiData | null>(null);
+    const [mubiDataError, setMubiDataError] = useState<string | null>(null);
+    const [mubiDataLoading, setMubiDataLoading] = useState<boolean>(false);
+
     const fetchMubiApiData = async () => {
         try {
-            setLoading(true);
+            setMubiDataLoading(true);
             const response = await fetch(API_URL);
             if (response.ok) {
                 const apiJsonData = await response.json();
                 const validatedData = MubApiDataSchema.parse(apiJsonData); 
-
+                
                 setMubiApiData(validatedData);
             } else {
                 throw new Error(`Failed GET request to ${API_URL}`);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
-                setError("Validation error: error does not match Mubi API data schema.");
+                setMubiDataError("Validation error: error does not match Mubi API data schema.");
                 console.error(error.issues);
             } else if (error instanceof Error) {
-                setError(`Data fetch error: ${error.message}`);
+                setMubiDataError(`Data fetch error: ${error.message}`);
             }
         } finally {
-            setLoading(false);
+            setMubiDataLoading(false);
         }
     }
 
@@ -39,5 +42,5 @@ export function useFetchMubiApiData() {
         // we only need to fetch this once on application load for this implementation.
     }, []);
 
-    return { mubiApiData, loading, error }
+    return { mubiApiData, mubiDataLoading, mubiDataError }
 }

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Based on json shape found @ https://mubi-dev-assets.s3.amazonaws.com/dev-interview-films.json
-
+// we are using snake case here to be consistent with the API.
 export const CastSchema = z.object({
     id: z.string(),
     name: z.string(),
@@ -13,11 +13,13 @@ export const FilmSchema = z.object({
     title: z.string(),
     release_year: z.number(),
     genres: z.array(z.string()),
-    cast: z.array(CastSchema).default([])
+    cast: z.array(CastSchema).default([]),
+    image_url: z.url(),
+    video_url: z.url()
 });
 
 export const MubApiDataSchema = z.array(FilmSchema);
 
-export type Cast = z.infer<typeof CastSchema>;
-export type Film = z.infer<typeof FilmSchema>;
+export type MubiCast = z.infer<typeof CastSchema>;
+export type MubiFilm = z.infer<typeof FilmSchema>;
 export type MubiApiData = z.infer<typeof MubApiDataSchema>;

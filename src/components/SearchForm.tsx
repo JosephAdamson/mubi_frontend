@@ -29,7 +29,7 @@ export default function SearchForm({ setSearchQueryHandler }: SearchFormProps) {
             onSubmit={onSubmitHandler}
             className="h-fit w-full flex justify-center items-center relative"
         >
-            <div className="w-full sm:w-2/3 xl:w-/12 relative">
+            <div className="w-full sm:w-2/3 xl:w-6/12 relative">
                 <input
                     type="text"
                     className="w-full p-2 border-2 border-mubi-grey rounded-sm"

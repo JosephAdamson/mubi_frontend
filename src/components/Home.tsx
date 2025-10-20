@@ -1,30 +1,14 @@
 import addButton from "/add.svg";
 import SearchForm from "./SearchForm";
-import type { MubiApiData } from "@/types/mubiApi.schema";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-import imagePlaceholder from "/image-placeholder.svg";
+import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 
-type HomeProps = {
-    films: MubiApiData;
-};
-
-// dummy review data coming soon
-const LOREM = `Lorem ipsum dolor sit amet consectetur adipiscing elit. 
-Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. 
-Integer nunc posuere ut hendrerit semper vel class. 
-Conubia nostra inceptos himenaeos orci varius natoque penatibus. 
-Mus donec rhoncus eros lobortis nulla molestie mattis. 
-Purus est efficitur laoreet mauris pharetra vestibulum fusce. 
-Sodales consequat magna ante condimentum neque at luctus. 
-Ligula congue sollicitudin erat viverra ac tincidunt nam. 
-Lectus commodo augue arcu dignissim velit aliquam imperdiet. 
-Cras eleifend turpis fames primis vulputate ornare sagittis. 
-Libero feugiat tristique accumsan maecenas potenti ultricies habitant. 
-Cubilia curae hac habitasse platea dictumst lorem ipsum. 
-Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.`;
-
-export default function Home({ films }: HomeProps) {
+/* 
+Render the main review list view
+*/
+export default function Home() {
+    const { filmsWithReviews } = useFilmReviewAppContext();
     const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
     useEffect(() => {
@@ -54,31 +38,12 @@ export default function Home({ films }: HomeProps) {
                     id="film-review-list"
                     className="flex flex-col gap-6 items-center py-10 overflow-y-scroll w-full"
                 >
-                    {/* dummy data */}
-                    <ReviewCard
-                        id={"apocalypse-now"}
-                        title={"Apocalypse Now"}
-                        director={"Fracis Ford Coppola"}
-                        date={1972}
-                        imgURL={imagePlaceholder}
-                        content={LOREM}
-                    />
-                    <ReviewCard
-                        id={"apocalypse-now"}
-                        title={"Apocalypse Now"}
-                        director={"Fracis Ford Coppola"}
-                        date={1972}
-                        imgURL={imagePlaceholder}
-                        content={LOREM}
-                    />
-                    <ReviewCard
-                        id={"apocalypse-now"}
-                        title={"Apocalypse Now"}
-                        director={"Fracis Ford Coppola"}
-                        date={1972}
-                        imgURL={imagePlaceholder}
-                        content={LOREM}
-                    />
+                    {Array.from(filmsWithReviews.values()).map((review) => (
+                        <ReviewCard
+                            key={review.id}
+                            reviewData={review}
+                        ></ReviewCard>
+                    ))}
                 </section>
             </section>
         </div>

@@ -2,11 +2,26 @@ import { z } from "zod";
 
 // type(s) defined to be used in-application, I've use snake case here to keep it consistent 
 // with the other json derived schemas, forgive me.
+
+// Define shape of data to be stored in localstorage.
 export const ReviewSchema = z.object({
-    id: z.string(),
-    film_id: z.string(),
+    filmId: z.string(),
     content: z.string(),
-    created_at: z.string()
+    createdAt: z.string()
+});
+
+// Combined data, composed from locally stored review data and film 
+// data from mubi API. Type passed to components for render.
+export const FilmWithReviewSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    director: z.string(),
+    releaseYear: z.number(),
+    imageURL: z.url(),
+    videoURL: z.url(),
+    reviewContent: z.string(),
+    createdAt: z.string()
 });
 
 export type Review = z.infer<typeof ReviewSchema>;
+export type FilmWithReview = z.infer<typeof FilmWithReviewSchema>;
