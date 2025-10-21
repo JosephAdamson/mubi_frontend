@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import searchIcon from "/search-icon.svg";
 
 type SearchFormProps = {
@@ -6,17 +6,13 @@ type SearchFormProps = {
 };
 
 /* 
-Search form with controlled elements, serach for film by name
+Search form with controlled elements, search for film by name.
 
 @component
 @param      function    setSearchQuery
 */
 export default function SearchForm({ setSearchQueryHandler }: SearchFormProps) {
     const [searchInputvalue, setSearchInputValue] = useState<string>("");
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchInputValue(e.target.value);
-    };
 
     const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -29,17 +25,21 @@ export default function SearchForm({ setSearchQueryHandler }: SearchFormProps) {
             onSubmit={onSubmitHandler}
             className="h-fit w-full flex justify-center items-center relative"
         >
-            <div className="w-full sm:w-2/3 xl:w-6/12 relative">
                 <input
                     type="text"
                     className="w-full p-2 border-2 border-mubi-grey rounded-sm"
-                    onChange={onChangeHandler}
+                    onChange={(e) => {
+                        setSearchInputValue(e.target.value);
+                    }}
+                    onBlur={() => {
+                        setSearchQueryHandler(searchInputvalue);
+                    }}
                     value={searchInputvalue}
                 />
-                <button className="p-2 hover:cursor-pointer border-mubi-grey border-2 absolute right-0 rounded-r-sm">
+                <button className="p-2 hover:cursor-pointer absolute right-0 hover:brightness-75">
                     <img src={searchIcon} alt="" />
                 </button>
-            </div>
+
         </form>
     );
 }

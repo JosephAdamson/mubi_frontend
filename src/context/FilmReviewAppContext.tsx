@@ -32,7 +32,7 @@ function FilmReviewAppProvider({ children }: { children: React.ReactNode }) {
         Map<string, FilmWithReview>
     >(new Map());
 
-    // handles our data
+    // Handles our data.
     useEffect(() => {
         if (mubiApiData) {
             const combinedFilmsAndReviews = combineFilmsAndReviews(
@@ -47,7 +47,7 @@ function FilmReviewAppProvider({ children }: { children: React.ReactNode }) {
         }
     }, [mubiApiData]);
 
-    // manages any errors we might have
+    // Manages any errors we might have.
     useEffect(() => {
         if (mubiDataError) {
             setErrors(prev => [...prev, {source: "mubiApi", message: mubiDataError}]);
