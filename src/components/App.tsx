@@ -4,8 +4,6 @@ import Home from "@/components/Home.js";
 import ReviewDetail from "./ReviewDetail";
 
 /* 
-TODO
-- Add Route for adding review (or include this as a modal?)
 
 Main application contains routing logic.
 */

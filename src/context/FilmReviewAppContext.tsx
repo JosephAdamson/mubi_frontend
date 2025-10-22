@@ -3,8 +3,10 @@ import { type Review, type FilmWithReview, type AppError } from "@/types/applica
 import useFetchMubiApiData from "@/hooks/useFetchMubiApiData";
 import { combineFilmsAndReviews } from "@/helpers";
 import useReviews from "@/hooks/useReviews";
+import type { MubiApiData } from "@/types/mubiApi.schema";
 
 interface FilmReviewAppContext {
+    mubiApiData: MubiApiData
     mubiDataLoading: boolean;
     mubiDataError: string | null;
     filmsWithReviews: Map<string, FilmWithReview>;
@@ -61,6 +63,7 @@ function FilmReviewAppProvider({ children }: { children: React.ReactNode }) {
     return (
         <FilmReviewAppContext.Provider
             value={{
+                mubiApiData,
                 filmsWithReviews,
                 addReview,
                 deleteReview,

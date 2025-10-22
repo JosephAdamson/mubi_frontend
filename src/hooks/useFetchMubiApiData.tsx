@@ -9,7 +9,7 @@ Fetch our film data from mubi api.
 @hook
 */
 export default function useFetchMubiApiData() {
-    const [mubiApiData, setMubiApiData] = useState<MubiApiData | null>(null);
+    const [mubiApiData, setMubiApiData] = useState<MubiApiData>([]);
     const [mubiDataError, setMubiDataError] = useState<string | null>(null);
     const [mubiDataLoading, setMubiDataLoading] = useState<boolean>(false);
 

@@ -1,9 +1,14 @@
 import { useState, type FormEvent } from "react";
 import SearchForm from "./SearchForm";
 import success from "/success.svg";
+import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 
 export default function ReviewForm() {
-    const [filmTitle, setFilmTitle] = useState<string>("");
+    const { addReview } = useFilmReviewAppContext();
+
+    const [searchQueryFilmId, setSearchQueryFilmId] = useState<String | null>(
+        null
+    );
     const [reviewContent, setReviewContent] = useState<string>("");
     const [reviewSaved, setReviewSaved] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
@@ -11,8 +16,13 @@ export default function ReviewForm() {
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
         setError(false);
         e.preventDefault();
+        console.log(searchQueryFilmId);
+        console.log(reviewContent);
         // check for empty fields
-        if (!filmTitle.trim() || !reviewContent.trim()) {
+        if (
+            !searchQueryFilmId ||
+            !reviewContent.trim()
+        ) {
             setError(true);
             return;
         }
@@ -21,7 +31,7 @@ export default function ReviewForm() {
 
     return (
         <section
-            className={`w-full p-6 bg-white shadow-2xl flex items-center flex-col gap-10 pt-10 pb-20 min-h-[300px]`}
+            className={`w-full p-6 bg-white shadow-2xl flex items-center flex-col xl:pt-10 pb-20 min-h-[300px]`}
         >
             {reviewSaved ? (
                 <div className="flex items-center gap-4 mt-20">
@@ -32,17 +42,17 @@ export default function ReviewForm() {
                 </div>
             ) : (
                 <>
-                    {error && (
-                        <div className="w-full md:w-2/3">
-                            <span className="text-red-500 text-lg">
+                    <div className="w-full md:w-2/3 mb-4">
+                        {error && (
+                            <span className="text-red-500">
                                 *Both film and review fields are required
                             </span>
-                        </div>
-                    )}
-                    <div className="w-full md:w-2/3">
+                        )}
+                    </div>
+                    <div className="w-full md:w-2/3 mb-6">
                         <span className="capitalize">film</span>
                         <SearchForm
-                            setSearchQueryHandler={setFilmTitle}
+                            setSelectedFilmIdHandler={setSearchQueryFilmId}
                         ></SearchForm>
                     </div>
                     <form
@@ -63,24 +73,10 @@ export default function ReviewForm() {
                                 id="review-content"
                                 name="review-content"
                                 className={
-                                    "border-2 border-mubi-grey p-2 rounded-sm h-[300px] overflow-auto"
+                                    "border-2 border-mubi-grey p-2 rounded-sm h-[200px] overflow-auto"
                                 }
                             ></textarea>
                         </label>
-                        <div className="w-full">
-                            {reviewSaved ? (
-                                <div className="flex items-center gap-4">
-                                    <img src={success} alt="" />
-                                    <span className="capitalize">
-                                        review has been succesfully saved
-                                    </span>
-                                </div>
-                            ) : (
-                                <button className="capitalize border-2 border-mubi-grey px-10 py-2 rounded-sm">
-                                    save
-                                </button>
-                            )}
-                        </div>
                     </form>
                 </>
             )}

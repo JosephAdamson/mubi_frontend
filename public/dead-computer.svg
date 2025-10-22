@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256">
+  <!-- Monitor outline -->
+  <rect x="8" y="10" width="48" height="32" rx="3" ry="3" fill="none" stroke="black" stroke-width="2"/>
+
+  <!-- Screen -->
+  <rect x="12" y="14" width="40" height="24" rx="2" ry="2" fill="none" stroke="black" stroke-width="1.5"/>
+
+  <!-- X eyes -->
+  <path d="M22 22 L26 26 M26 22 L22 26" stroke="black" stroke-width="2" stroke-linecap="round"/>
+  <path d="M38 22 L42 26 M42 22 L38 26" stroke="black" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Dead mouth -->
+  <path d="M26 32 L38 32" stroke="black" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Stand -->
+  <rect x="28" y="42" width="8" height="3" fill="none" stroke="black" stroke-width="1.5"/>
+  <rect x="22" y="45" width="20" height="3" fill="none" stroke="black" stroke-width="1.5"/>
+</svg>

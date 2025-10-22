@@ -83,16 +83,16 @@ Taking a look at the API data we can split it up into 2 (so far) types Film and 
 ```
 
 MVP
-- [ ] Creation of a film review with review text attribute.
+- [] Creation of a film review with review text attribute.
 - [ ] A review can be deleted.
 - [x] Each review should have its own canonical url.
-- [ ] Films are searchable by the title field.
+- [x] Films are searchable by the title field.
 - [x] All reviews are navigable from a single index view.
   
 EXTRA
 - [ ] The reviews in the index view are filterable by film genre.
 - [x] Reviews are persisted locally and reconstituted when the application is reopened.
-- [ ] Apply responsive CSS to optimize the layout for the available screen size.
+- [x] Apply responsive CSS to optimize the layout for the available screen size.
 
 Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
 Component list (based on looking at wireframes)

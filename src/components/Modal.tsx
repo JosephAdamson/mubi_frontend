@@ -23,7 +23,7 @@ export default function Modal({
                 isOpen ? "" : "hidden"
             }`}
         >
-            <div className="w-full sm:w-2/3 rounded-b-sm overflow-hidden">
+            <div className="w-11/12 sm:w-2/3 rounded-b-sm overflow-hidden">
                 <div
                     id="close-modal-header"
                     className="w-full flex justify-end p-4 rounded-t-sm bg-mubi-blue"

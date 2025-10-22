@@ -15,7 +15,7 @@ Card view for review data. Used for homepage listing.
 export default function ReviewCard({ reviewData }: ReviewCardProps) {
 
     return (
-        <div className="w-full sm:w-2/3 xl:w-3/5 py-6 px-4">
+        <div className="w-full md:w-2/3 xl:w-6/12 py-6 px-4">
             <section className="flex flex-col md:flex-row">
                 <div className="w-full md:w-1/2 flex flex-col mb-4 md:mb-0">
                     <h3 className="capitalize font-semibold text-2xl mb-4">
