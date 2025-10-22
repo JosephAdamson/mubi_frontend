@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MubApiDataSchema, type MubiApiData} from "@/types/mubiApi.schema";
+import { MubiApiDataSchema, type MubiApiData} from "@/types/mubiApi.schema";
 import { z } from "zod";
 import { API_URL } from "@/constants";
 
@@ -19,7 +19,7 @@ export default function useFetchMubiApiData() {
             const response = await fetch(API_URL);
             if (response.ok) {
                 const apiJsonData = await response.json();
-                const validatedData = MubApiDataSchema.parse(apiJsonData); 
+                const validatedData = MubiApiDataSchema.parse(apiJsonData); 
                 
                 setMubiApiData(validatedData);
             } else {

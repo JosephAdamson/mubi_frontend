@@ -18,8 +18,8 @@ export const FilmSchema = z.object({
     video_url: z.url()
 });
 
-export const MubApiDataSchema = z.array(FilmSchema);
+export const MubiApiDataSchema = z.array(FilmSchema);
 
 export type MubiCast = z.infer<typeof CastSchema>;
 export type MubiFilm = z.infer<typeof FilmSchema>;
-export type MubiApiData = z.infer<typeof MubApiDataSchema>;
+export type MubiApiData = z.infer<typeof MubiApiDataSchema>;

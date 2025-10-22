@@ -46,19 +46,25 @@ export const REACT_SELECT_STYLES = {
     }),
 };
 
-export const dummyReviews = new Map<string, Review>();
-dummyReviews.set("annie-hall", {
+// For testing/display only.
+export const DUMMY_REVIEWS = new Map<string, Review>();
+DUMMY_REVIEWS.set("annie-hall", {
     filmId: "annie-hall",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00",
+    createdAt: "2025-10-22T20:58:17.739Z",
 });
-dummyReviews.set("breathless", {
+DUMMY_REVIEWS.set("breathless", {
     filmId: "breathless",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00",
+    createdAt: "2025-10-22T20:58:17.739Z",
 });
-dummyReviews.set("aguirre-the-wrath-of-god", {
+DUMMY_REVIEWS.set("blue-velvet", {
+    filmId: "breathless",
+    content: "She was wearing BLUEEEEEEEE VELVEEEET",
+    createdAt: "2025-10-22T20:58:17.739Z",
+});
+DUMMY_REVIEWS.set("aguirre-the-wrath-of-god", {
     filmId: "aguirre-the-wrath-of-god",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00",
+    createdAt: "2025-10-22T20:58:17.739Z",
 });

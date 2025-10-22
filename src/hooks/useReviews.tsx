@@ -25,15 +25,21 @@ export default function useReviews() {
 
             return new Map(parsedReviewData);
         } catch (error) {
-            setReviewsError(`Failed to load reviews from local storage: ${error}`);
+            console.error(`Failed to initialize reviews: ${error}`);
             return new Map<string, Review>();
         }
     });
 
     // persist changes when a review is updated.
     useEffect(() => {
-        const serializedReviews = JSON.stringify(Array.from(reviews.entries()));
-        localStorage.setItem(STORAGE_KEY, serializedReviews);
+        try {
+            const serializedReviews = JSON.stringify(
+                Array.from(reviews.entries())
+            );
+            localStorage.setItem(STORAGE_KEY, serializedReviews);
+        } catch (error) {
+            setReviewsError(`Local storage error: ${error}`);
+        }
     }, [reviews]);
 
     // handlers create, delete

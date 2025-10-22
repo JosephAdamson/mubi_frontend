@@ -72,6 +72,7 @@ Application UI will have 2(3) pages.
 - Create standalone low level components (buttons, inputs, modals, etc) for more visual consitency.
 - Image tags for pictures (that's if your API served different picture sizes for different layouts).
 - Aways could improve the design/visual flare.
+- Testing. Still pretty new to UI testing but a more methodical TDD approach would greatly help in ironing out bugs.
 
 >[!NOTE]
 > I followed a specific style for my commits found [here](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines), first time using it. Thought I would try it out.
