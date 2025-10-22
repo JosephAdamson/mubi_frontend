@@ -28,19 +28,13 @@ export default function Home() {
           )
         : Array.from(filmsWithReviews.values());
 
-    useEffect(() => {
-        console.log(searchQueryFilmId);
-        console.log(displayReviews);
-        if (searchQueryFilmId === "") {
-            console.log("nullable");
-        }
-    }, [searchQueryFilmId]);
+    useEffect(() => {}, [filmsWithReviews]);
 
     return (
-        <div className="h-screen flex flex-col overflow-hidden">
+        <div className="min-h-screen flex flex-col">
             <section
                 id="home-header"
-                className="w-full flex justify-between items-center bg-mubi-blue px-6 xl:px-10 min-h-[100px]"
+                className="w-full flex justify-between items-center bg-mubi-blue px-6 xl:px-10 min-h-[100px] sticky top-0 left-0 z-30"
             >
                 <img
                     src={mubiLogo}
@@ -62,9 +56,12 @@ export default function Home() {
             </section>
             <section
                 id="home-data-container"
-                className="w-full flex flex-col py-6 h-full"
+                className="w-full flex flex-col h-full"
             >
-                <div className="w-full flex flex-col items-center py-4">
+                <div
+                    id="filter-bar"
+                    className="w-full flex flex-col items-center py-4 sticky top-[100px] bg-white"
+                >
                     <div className="w-full md:w-2/3 xl:w-6/12 px-4">
                         <SearchForm
                             placeholder={"Search your review logs..."}
@@ -74,7 +71,7 @@ export default function Home() {
                 </div>
                 <section
                     id="film-review-list"
-                    className="flex flex-col gap-6 items-center py-10 overflow-y-scroll"
+                    className="flex flex-col gap-6 items-center"
                 >
                     {displayReviews.length > 0 ? (
                         displayReviews.map((review) => (
@@ -84,12 +81,9 @@ export default function Home() {
                             ></ReviewCard>
                         ))
                     ) : (
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-6 mt-10">
                             <div className="flex flex-col items-center text-xl">
-                                <p>
-                                    Oops looks like you haven't reviewed this
-                                    film yet.
-                                </p>
+                                <p>Oops, no reviews here yet.</p>
                                 <p>
                                     Click the{" "}
                                     <span className="font-semibold">

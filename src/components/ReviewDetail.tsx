@@ -1,9 +1,11 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import imagePlaceholder from "/image-placeholder.svg";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 import chevronLeft from "/chevron-left.svg";
 import trashcan from "/trashcan.svg";
 import deadComputer from "/dead-computer.svg";
+import { useState } from "react";
+import Modal from "./Modal";
 
 /* 
 Main view for user-generated film review.
@@ -11,8 +13,11 @@ Main view for user-generated film review.
 @component
 */
 export default function ReviewDetail() {
+    let navigate = useNavigate();
     const { id } = useParams();
-    const { filmsWithReviews } = useFilmReviewAppContext();
+    const { filmsWithReviews, deleteReview } = useFilmReviewAppContext();
+
+    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
     if (!id) {
         return <div>Whoops</div>;
@@ -38,6 +43,9 @@ export default function ReviewDetail() {
                     <img src={chevronLeft} alt="" />
                 </Link>
                 <button
+                    onClick={() => {
+                        setDeleteModalOpen(true);
+                    }}
                     className="hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
                     aria-label="Delete current review"
                 >
@@ -80,7 +88,8 @@ export default function ReviewDetail() {
                 ) : (
                     <div className="flex flex-col items-center text-xl">
                         <p>
-                            Oops, looks like we could not retrieve your review...
+                            Oops, looks like we could not retrieve your
+                            review...
                         </p>
                         <img
                             src={deadComputer}
@@ -93,6 +102,30 @@ export default function ReviewDetail() {
                     </div>
                 )}
             </section>
+            <Modal
+                isOpen={deleteModalOpen}
+                setIsOpenHandler={setDeleteModalOpen}
+            >
+                <div className="w-full bg-white p-10 flex justify-center">
+                    <div className="flex flex-col w-full lg:w-1/3 items-center gap-10">
+                        <p className="text-lg w">
+                            Are you sure you want to delete this review?
+                        </p>
+                        <div className="w-full">
+                            <button
+                                onClick={() => {
+                                    deleteReview(id);
+                                    navigate(-1);
+                                }}
+                                className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-pointer"
+                                aria-label="Confirm review delete"
+                            >
+                                Yes, I'm sure.
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

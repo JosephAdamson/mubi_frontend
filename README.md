@@ -83,8 +83,8 @@ Taking a look at the API data we can split it up into 2 (so far) types Film and 
 ```
 
 MVP
-- [] Creation of a film review with review text attribute.
-- [ ] A review can be deleted.
+- [x] Creation of a film review with review text attribute.
+- [x] A review can be deleted.
 - [x] Each review should have its own canonical url.
 - [x] Films are searchable by the title field.
 - [x] All reviews are navigable from a single index view.

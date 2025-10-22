@@ -2,11 +2,12 @@ import { useState, type FormEvent } from "react";
 import SearchForm from "./SearchForm";
 import success from "/success.svg";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
+import { type Review } from "@/types/application.schema";
 
 export default function ReviewForm() {
     const { addReview } = useFilmReviewAppContext();
 
-    const [searchQueryFilmId, setSearchQueryFilmId] = useState<String | null>(
+    const [searchQueryFilmId, setSearchQueryFilmId] = useState<string | null>(
         null
     );
     const [reviewContent, setReviewContent] = useState<string>("");
@@ -19,13 +20,17 @@ export default function ReviewForm() {
         console.log(searchQueryFilmId);
         console.log(reviewContent);
         // check for empty fields
-        if (
-            !searchQueryFilmId ||
-            !reviewContent.trim()
-        ) {
+        if (!searchQueryFilmId || !reviewContent.trim()) {
             setError(true);
             return;
         }
+        // get deets to make review obj
+        const newReview: Review = {
+            filmId: searchQueryFilmId,
+            content: reviewContent,
+            createdAt: new Date().toISOString(),
+        };
+        addReview(searchQueryFilmId, newReview);
         setReviewSaved(true);
     };
 
@@ -77,6 +82,13 @@ export default function ReviewForm() {
                                 }
                             ></textarea>
                         </label>
+                        <div className="w-full">
+                            <button 
+                            className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-point"
+                            aria-label="Save your review">
+                                save
+                            </button>
+                        </div>
                     </form>
                 </>
             )}

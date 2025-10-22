@@ -34,7 +34,7 @@ function FilmReviewAppProvider({ children }: { children: React.ReactNode }) {
         Map<string, FilmWithReview>
     >(new Map());
 
-    // Handles our data.
+    // Handles our data, listens for changes in reviews.
     useEffect(() => {
         if (mubiApiData) {
             const combinedFilmsAndReviews = combineFilmsAndReviews(
@@ -47,7 +47,7 @@ function FilmReviewAppProvider({ children }: { children: React.ReactNode }) {
         } else {
             
         }
-    }, [mubiApiData]);
+    }, [mubiApiData, reviews]);
 
     // Manages any errors we might have.
     useEffect(() => {
