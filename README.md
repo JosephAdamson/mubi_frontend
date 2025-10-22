@@ -1,3 +1,85 @@
+## Mubi 2025 Frontend Task: Joe's Notes/Log (for original spec see below)
+
+#### How to run
+`npm run dev`
+
+#### Additional dependencies
+- [react router dom](https://reactrouter.com/start/declarative/installation) client side cannonical URLs required for individual reviews.
+- [zod](https://zod.dev/) Good, simple validation library for derived/custom types.
+- [tailwindcss](https://tailwindcss.com/docs/installation/using-vite) UI styling.
+- [react-select](https://react-select.com/home) Good untility component for my filter bars (title and genre)
+
+### TODO
+
+#### Data
+Taking a look at the API data we can split it up into 2 (so far) types Film and it's subtype Cast.
+
+```json
+{
+    "id": "annie-hall",
+    "title": "Annie Hall",
+    "release_year": 1977,
+    "genres": [
+      "Comedy",
+      "Romance",
+      "Drama"
+    ],
+    "cast": [
+      {
+        "id": "woody-allen",
+        "name": "Woody Allen",
+        "credits": [
+          "Director",
+          "Cast",
+          "Screenplay"
+        ]
+      }, ...
+```
+
+#### MVP
+- [x] Creation of a film review with review text attribute.
+- [x] A review can be deleted.
+- [x] Each review should have its own canonical url.
+- [x] Films are searchable by the title field.
+- [x] All reviews are navigable from a single index view.
+  
+#### EXTRA
+- [x] The reviews in the index view are filterable by film genre.
+- [x] Reviews are persisted locally and reconstituted when the application is reopened.
+- [x] Apply responsive CSS to optimize the layout for the available screen size.
+
+Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
+Rough component list (based on looking at wireframes)
+
+Data: two hooks and a context.
+- [x] One for pulling in the mubi API data that we will need for search
+- [x] One for handling the storage of reviews
+  - Because this is a small demo app, we can get away with achieving persitance for our reviews by storing them in local storage (5-10mb per domain), in theroy this could still store hundreds of reviews, especially if the content had a character limit. In reality this would feature would be better served storing our reviews in a DB.
+- [x] One context for centralizing, sorting and managing our api and locally stored data.
+  
+Application UI will have 2(3) pages. 
+- [x] Home (search review by genre)
+  - [x] HomeHeader (open add review modal)
+  - [x] SearchForm (search film data, already loaded into memory)
+  - [x] ReviewCard (Render review sample)
+    NOTE: think about how we want to render review list (pagination? lazy loading?)
+- [x] ReviewDetail (each review page has it's own unique URL based on an id)
+- [x] ReviewForm (user generated reviews, this could be a modal)
+
+### Thoughts on it could be extended/improved
+- Lazy loading for review list. In the case of thousands of reviews you would only need to fetch the first page (first 10 or so) of the results. You could use lazy loading to fetch the next page of reviews once a user scrolls to the bottom.
+- Star ratings, this gives you another filter option for your data. Plus, everyone loves stars.
+- Create standalone low level components (buttons, inputs, modals, etc) for more visual consitency.
+- Image tags for pictures (that's if your API served different picture sizes for different layouts).
+- Aways could improve the design/visual flare.
+
+>[!NOTE]
+> I followed a specific style for my commits found [here](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines), first time using it. Thought I would try it out.
+
+<hr>
+</br>
+</br>
+
 # _"As a user, I want to keep a log of my film reviews."_
 
 Using React and supporting libraries of your choice, build a simple web application to fulfill this user story. It doesn't need to be polished aesthetically, but it should meet the basic requirements in a robust manner.
@@ -48,66 +130,3 @@ You may wish to fork this repository into your local github account, or you may 
 
 
 Reach out over email if you have any questions!
-
-### ADDENDUM: Joe's Notes/Log
-<hr>
-
-#### Additional dependencies
-- [react router dom](https://reactrouter.com/start/declarative/installation) client side cannonical URLs required for individual reviews.
-- [zod](https://zod.dev/) Good, simple validation library for derived/custom types.
-- [tailwindcss] UI styling.
-
-#### Data
-Taking a look at the API data we can split it up into 2 (so far) types Film and it's subtype Cast.
-
-```json
-{
-    "id": "annie-hall",
-    "title": "Annie Hall",
-    "release_year": 1977,
-    "genres": [
-      "Comedy",
-      "Romance",
-      "Drama"
-    ],
-    "cast": [
-      {
-        "id": "woody-allen",
-        "name": "Woody Allen",
-        "credits": [
-          "Director",
-          "Cast",
-          "Screenplay"
-        ]
-      }, ...
-```
-
-MVP
-- [x] Creation of a film review with review text attribute.
-- [x] A review can be deleted.
-- [x] Each review should have its own canonical url.
-- [x] Films are searchable by the title field.
-- [x] All reviews are navigable from a single index view.
-  
-EXTRA
-- [ ] The reviews in the index view are filterable by film genre.
-- [x] Reviews are persisted locally and reconstituted when the application is reopened.
-- [x] Apply responsive CSS to optimize the layout for the available screen size.
-
-Looking at the wireframes we will need a type to define a Review linked to film by id (the film name).
-Component list (based on looking at wireframes)
-
-Data: two hooks and a context.
-- [x] One for pulling in the mubi API data that we will need for search
-- [x] One for handling the storage of reviews
-  - Because this is a small demo app, we can get away with achieving persitance for our reviews by storing them in local storage (5-10mb per domain), in theroy this could still store hundreds of reviews, especially if the content had a character limit. In reality this would feature would be better served storing our reviews in a DB.
-- [x] One context for centralizing, sorting and managing our api and locally stored data.
-  
-Application UI will have 2(3) pages. 
-- [x] Home (search review by genre)
-  - [x] HomeHeader (open add review modal)
-  - [x] SearchForm (search film data, already loaded into memory)
-  - [x] ReviewCard (Render review sample)
-    NOTE: think about how we want to render review list (pagination? lazy loading?)
-- [x] ReviewDetail (each review page has it's own unique URL based on an id)
-- [x] ReviewForm (user generated reviews, this could be a modal)

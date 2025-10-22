@@ -6,7 +6,7 @@ Simpl utiltiy component for in-app modals
 @component
 */
 
-type ModaProps = {
+type ModalProps = {
     children: React.ReactNode;
     isOpen: boolean;
     setIsOpenHandler: Dispatch<SetStateAction<boolean>>;
@@ -16,7 +16,7 @@ export default function Modal({
     children,
     isOpen,
     setIsOpenHandler,
-}: ModaProps) {
+}: ModalProps) {
     return (
         <section
             className={`w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black/40 z-50 ${

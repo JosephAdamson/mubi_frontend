@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router";
+import { useParams, Link, useNavigate, Navigate } from "react-router";
 import imagePlaceholder from "/image-placeholder.svg";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 import chevronLeft from "/chevron-left.svg";
@@ -20,7 +20,7 @@ export default function ReviewDetail() {
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
     if (!id) {
-        return <div>Whoops</div>;
+        return <Navigate to="/404"/>
     }
 
     const reviewData = filmsWithReviews.get(id)
@@ -34,7 +34,7 @@ export default function ReviewDetail() {
         >
             <section
                 id="review-detail-header"
-                className="w-full min-h-[100px] flex justify-between items-center bg-mubi-blue py-4 px-8"
+                className="w-full min-h-[80px] flex justify-between items-center bg-mubi-blue py-4 px-8"
             >
                 <Link
                     to="/"
@@ -69,6 +69,9 @@ export default function ReviewDetail() {
                                 <span className="text-lg">
                                     {reviewData.releaseYear}
                                 </span>
+                                <span className="text-lg">
+                                    {reviewData.genres.join(", ")}
+                                </span>
                             </div>
                             <div className="w-full md:w-1/2 flex justify-center border-mubi-grey border-2 rounded-sm">
                                 <img
@@ -80,6 +83,24 @@ export default function ReviewDetail() {
                                     alt=""
                                 />
                             </div>
+                        </div>
+                        <div>
+                            <span className="test-lg capitalize">
+                                <span className="font-semibold">posted:</span>{" "}
+                                {(() => {
+                                    const date = new Date(reviewData.createdAt);
+
+                                    if (!date || isNaN(date.getTime())) {
+                                        return "unknown";
+                                    }
+
+                                    return date.toLocaleString("en-BG", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    });
+                                })()}
+                            </span>
                         </div>
                         <div id="review-detail-content">
                             {reviewData.reviewContent}
@@ -115,7 +136,7 @@ export default function ReviewDetail() {
                             <button
                                 onClick={() => {
                                     deleteReview(id);
-                                    navigate(-1);
+                                    navigate("/");
                                 }}
                                 className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-pointer"
                                 aria-label="Confirm review delete"

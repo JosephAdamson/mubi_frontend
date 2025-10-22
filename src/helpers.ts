@@ -13,7 +13,7 @@ Returns a clipped version of a string with an ellipsis tacked on the end.
 */
 function truncateText(text: string) {
     if (text && text.length > 0) {
-        return text.length >= 200 ? `${text.slice(0, 200)}...` : `${text}...`;
+        return text.length >= 200 ? `${text.slice(0, 200)}...` : `${text}`;
     }
 }
 
@@ -68,7 +68,7 @@ function combineFilmsAndReviews(
         if (error instanceof z.ZodError) {
             console.error(error.issues);
         } else if (error instanceof Error) {
-            console.log(error);
+            console.error(error);
         }
     }
 }

@@ -25,7 +25,7 @@ export default function ReviewCard({ reviewData }: ReviewCardProps) {
                     <span className="text-lg">{reviewData.releaseYear}</span>
                     <span className="text-lg">{reviewData.genres.join(", ")}</span>
                 </div>
-                <div className="w-full md:w-1/2 flex justify-center border-mubi-grey border-2 rounded-sm">
+                <div className="w-full md:w-1/2 flex justify-center rounded-sm overflow-hidden">
                     <img
                         src={
                             reviewData.imageURL

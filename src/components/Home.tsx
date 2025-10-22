@@ -28,9 +28,10 @@ export default function Home() {
     // I've kept the filtering logic seperate here, just for readibility.
     // filter by title
     let displayReviews = searchQueryFilmId
-        ? Array.from(filmsWithReviews.values()).filter(
-              (review) => review.id === searchQueryFilmId
-          )
+        ? filmsWithReviews.get(searchQueryFilmId)
+            // got to convince ts that it won't be undefined
+            ? [filmsWithReviews.get(searchQueryFilmId)!]
+            : []
         : Array.from(filmsWithReviews.values());
 
     // filter by genre
@@ -47,12 +48,12 @@ export default function Home() {
         <div className="min-h-screen flex flex-col">
             <section
                 id="home-header"
-                className="w-full flex justify-between items-center bg-mubi-blue px-6 xl:px-10 min-h-[100px] sticky top-0 left-0 z-30"
+                className="w-full flex justify-between items-center bg-mubi-blue px-6 xl:px-10 min-h-[80px] sticky top-0 left-0 z-30"
             >
                 <img
                     src={mubiLogo}
                     style={{
-                        height: "100px",
+                        height: "50px",
                         width: "100px",
                     }}
                     alt=""
@@ -74,7 +75,7 @@ export default function Home() {
                 <div
                     id="filter-bar"
                     className="w-full flex flex-col lg:flex-row justify-center items-center 
-                    py-4 sticky top-[100px] bg-mubi-light-grey gap-4 border-b-[1.2px] 
+                    py-4 sticky top-[80px] bg-mubi-light-grey gap-4 border-b-[1.2px] 
                     border-mubi-grey"
                 >
                     <div className="w-full md:w-2/3 xl:w-4/12 px-4">

@@ -34,8 +34,12 @@ export default function TitleSearchBar({
     return (
         <Select
             options={filmOptions}
-            onChange={(filmOption: any) => {
-                setSelectedFilmIdHandler(filmOption?.value ?? null);
+            onChange={(filmOption: FilmOption | null) => {
+                if (filmOption) {
+                    setSelectedFilmIdHandler(filmOption?.value ?? null);
+                } else {
+                    setSelectedFilmIdHandler("");
+                }
             }}
             placeholder={placeholder}
             isClearable

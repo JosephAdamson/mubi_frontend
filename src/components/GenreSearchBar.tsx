@@ -44,8 +44,9 @@ export default function GenreSearchBar({
             placeholder={placeholder}
             options={uniqueGenreOptions}
             onChange={(options) => {
-                const genres = options.map(option => option.value);
-                console.log(genres);
+                const genres = options
+                    ? options.map((option) => option.value)
+                    : [];
                 setSelectedGenresHandler(genres);
             }}
             isMulti

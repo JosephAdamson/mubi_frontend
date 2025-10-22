@@ -19,14 +19,12 @@ export default function ReviewForm() {
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
         setError(false);
         e.preventDefault();
-        console.log(searchQueryFilmId);
-        console.log(reviewContent);
+
         // check for empty fields
         if (!searchQueryFilmId || !reviewContent.trim()) {
             setError(true);
             return;
         }
-        // get deets to make review obj
         const newReview: Review = {
             filmId: searchQueryFilmId,
             content: reviewContent,
@@ -49,6 +47,7 @@ export default function ReviewForm() {
                 </div>
             ) : (
                 <>
+                <h3 className="text-lg">Tell us what you thought!</h3>
                     <div className="w-full md:w-2/3 mb-4 min-h-[24px]">
                         {error && (
                             <span className="text-red-500">
@@ -65,8 +64,15 @@ export default function ReviewForm() {
                     <form
                         action=""
                         onSubmit={onSubmitHandler}
-                        className="flex flex-col w-full md:w-2/3 gap-10"
+                        className="flex flex-col w-full md:w-2/3 gap-6"
                     >
+                        <div className="min-h-[24px]">
+                                {characterLimitExceed && (
+                                    <span className="text-red-500">
+                                        * Character limit has been exceeded.
+                                    </span>
+                                )}
+                            </div>
                         <label
                             htmlFor="review-content"
                             className="flex flex-col capitalize"
@@ -74,7 +80,7 @@ export default function ReviewForm() {
                             review content
                             <textarea
                                 onChange={(e) => {
-                                    if (e.target.value.length <= 855) {
+                                    if (e.target.value.length <= 50) {
                                         setcharacterLimitExceed(false);
                                         setReviewContent(e.target.value);
                                     } else {
@@ -84,19 +90,12 @@ export default function ReviewForm() {
                                 value={reviewContent}
                                 id="review-content"
                                 name="review-content"
-                                className="border-2 border-mubi-grey p-2 rounded-sm h-[200px] overflow-auto"
+                                className="border-[1.2px] border-mubi-grey p-2 rounded-sm h-[200px] overflow-auto"
                             ></textarea>
-                            <div className="min-h-[24px]">
-                                {characterLimitExceed && (
-                                    <span className="text-red-500">
-                                        * Character limit has been exceeded.
-                                    </span>
-                                )}
-                            </div>
                         </label>
                         <div className="w-full">
                             <button
-                                className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-point"
+                                className="capitalize px-10 py-1 hover:cursor-pointer text-white bg-mubi-blue"
                                 aria-label="Save your review"
                             >
                                 save
