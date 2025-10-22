@@ -13,6 +13,8 @@ export default function ReviewForm() {
     const [reviewContent, setReviewContent] = useState<string>("");
     const [reviewSaved, setReviewSaved] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    const [characterLimitExceed, setcharacterLimitExceed] =
+        useState<boolean>(false);
 
     const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
         setError(false);
@@ -47,10 +49,10 @@ export default function ReviewForm() {
                 </div>
             ) : (
                 <>
-                    <div className="w-full md:w-2/3 mb-4">
+                    <div className="w-full md:w-2/3 mb-4 min-h-[24px]">
                         {error && (
                             <span className="text-red-500">
-                                *Both film and review fields are required
+                                * Both film and review fields are required
                             </span>
                         )}
                     </div>
@@ -72,20 +74,31 @@ export default function ReviewForm() {
                             review content
                             <textarea
                                 onChange={(e) => {
-                                    setReviewContent(e.target.value);
+                                    if (e.target.value.length <= 855) {
+                                        setcharacterLimitExceed(false);
+                                        setReviewContent(e.target.value);
+                                    } else {
+                                        setcharacterLimitExceed(true);
+                                    }
                                 }}
                                 value={reviewContent}
                                 id="review-content"
                                 name="review-content"
-                                className={
-                                    "border-2 border-mubi-grey p-2 rounded-sm h-[200px] overflow-auto"
-                                }
+                                className={`border-2 p-2 rounded-sm h-[200px] overflow-auto`}
                             ></textarea>
+                            <div className="min-h-[24px]">
+                                {characterLimitExceed && (
+                                    <span className="text-red-500">
+                                        * Character limit has been exceeded.
+                                    </span>
+                                )}
+                            </div>
                         </label>
                         <div className="w-full">
-                            <button 
-                            className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-point"
-                            aria-label="Save your review">
+                            <button
+                                className="capitalize border-2 border-mubi-grey px-10 py-1 rounded-sm hover:cursor-point"
+                                aria-label="Save your review"
+                            >
                                 save
                             </button>
                         </div>

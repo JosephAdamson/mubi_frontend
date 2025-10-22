@@ -19,7 +19,7 @@ export default function Modal({
 }: ModaProps) {
     return (
         <section
-            className={`w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black/40 ${
+            className={`w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black/40 z-50 ${
                 isOpen ? "" : "hidden"
             }`}
         >

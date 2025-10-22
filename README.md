@@ -109,5 +109,5 @@ Application UI will have 2(3) pages.
   - [x] SearchForm (search film data, already loaded into memory)
   - [x] ReviewCard (Render review sample)
     NOTE: think about how we want to render review list (pagination? lazy loading?)
-- [ ] Review (each review page has it's own unique URL based on an id)
-- [ ] ReviewForm (user generated reviews, this could be a modal)
+- [x] ReviewDetail (each review page has it's own unique URL based on an id)
+- [x] ReviewForm (user generated reviews, this could be a modal)

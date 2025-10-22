@@ -1,4 +1,3 @@
-import mubiLogo from "/logo.svg";
 import deadComputer from "/dead-computer.svg";
 
 export default function NotFound() {

@@ -11,7 +11,6 @@ import vega from "/vincent-vega.gif";
 /* 
 TODO
 - Add genre search
-- Think about loading of card items
 
 Render the main review list view
 */
