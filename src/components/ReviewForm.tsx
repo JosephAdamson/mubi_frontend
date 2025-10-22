@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import SearchForm from "./SearchForm";
+import TitleSearchBar from "./TitleSearchBar";
 import success from "/success.svg";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 import { type Review } from "@/types/application.schema";
@@ -58,9 +58,9 @@ export default function ReviewForm() {
                     </div>
                     <div className="w-full md:w-2/3 mb-6">
                         <span className="capitalize">film</span>
-                        <SearchForm
+                        <TitleSearchBar
                             setSelectedFilmIdHandler={setSearchQueryFilmId}
-                        ></SearchForm>
+                        ></TitleSearchBar>
                     </div>
                     <form
                         action=""
@@ -84,7 +84,7 @@ export default function ReviewForm() {
                                 value={reviewContent}
                                 id="review-content"
                                 name="review-content"
-                                className={`border-2 p-2 rounded-sm h-[200px] overflow-auto`}
+                                className="border-2 border-mubi-grey p-2 rounded-sm h-[200px] overflow-auto"
                             ></textarea>
                             <div className="min-h-[24px]">
                                 {characterLimitExceed && (

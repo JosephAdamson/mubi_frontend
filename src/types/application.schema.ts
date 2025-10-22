@@ -20,6 +20,7 @@ export const FilmWithReviewSchema = z.object({
     imageURL: z.url(),
     videoURL: z.url(),
     reviewContent: z.string(),
+    genres: z.array(z.string()),
     createdAt: z.string()
 });
 

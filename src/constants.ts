@@ -1,6 +1,7 @@
 import { type Review } from "./types/application.schema";
 
-export const API_URL = 'https://mubi-dev-assets.s3.amazonaws.com/dev-interview-films.json'
+export const API_URL =
+    "https://mubi-dev-assets.s3.amazonaws.com/dev-interview-films.json";
 
 export const LOREM = `Lorem ipsum dolor sit amet consectetur adipiscing elit. 
 Placerat in id cursus mi pretium tellus duis. Urna tempor pulvinar vivamus fringilla lacus nec metus. 
@@ -16,19 +17,48 @@ Libero feugiat tristique accumsan maecenas potenti ultricies habitant.
 Cubilia curae hac habitasse platea dictumst lorem ipsum. 
 Faucibus ex sapien vitae pellentesque sem placerat in. Tempus leo eu aenean sed diam urna tempor.`;
 
+  // react-select doesn't support tailwind.
+export const REACT_SELECT_STYLES = {
+    control: (provided: any) => ({
+        ...provided,
+        borderRadius: "0px",
+        borderWidth: "1.2px",
+        borderColor: "#999999", // mubi-grey
+        padding: "0.25rem",
+    }),
+    option: (provided: any, state: any) => ({
+        ...provided,
+        backgroundColor: state.isFocused
+            ? "#bfdbfe"
+            : state.isSelected
+            ? "#93c5fd"
+            : "white",
+        color: "black",
+        cursor: "pointer",
+    }),
+    menu: (provided: any) => ({
+        ...provided,
+        zIndex: 10,
+    }),
+    singleValue: (provided: any) => ({
+        ...provided,
+        color: "black",
+    }),
+};
+
 export const dummyReviews = new Map<string, Review>();
 dummyReviews.set("annie-hall", {
     filmId: "annie-hall",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00"
+    createdAt: "01.01.25 00:00:00",
 });
 dummyReviews.set("breathless", {
     filmId: "breathless",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00"
+    createdAt: "01.01.25 00:00:00",
 });
 dummyReviews.set("aguirre-the-wrath-of-god", {
     filmId: "aguirre-the-wrath-of-god",
     content: LOREM,
-    createdAt: "01.01.25 00:00:00"
+    createdAt: "01.01.25 00:00:00",
 });

@@ -53,6 +53,7 @@ function combineFilmsAndReviews(
                 releaseYear: film.release_year,
                 imageURL: film.image_url,
                 videoURL: film.video_url,
+                genres: film.genres,
                 reviewContent: review.content,
                 createdAt: review.createdAt,
             };

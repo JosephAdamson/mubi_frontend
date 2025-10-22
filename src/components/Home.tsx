@@ -1,6 +1,7 @@
 import addButton from "/add.svg";
-import SearchForm from "./SearchForm";
-import { useEffect, useState } from "react";
+import TitleSearchBar from "./TitleSearchBar";
+import GenreSearchBar from "./GenreSearchBar";
+import { useState } from "react";
 import ReviewCard from "./ReviewCard";
 import { useFilmReviewAppContext } from "@/context/FilmReviewAppContext";
 import Modal from "./Modal";
@@ -9,25 +10,38 @@ import mubiLogo from "/logo.svg";
 import vega from "/vincent-vega.gif";
 
 /* 
-TODO
-- Add genre search
 
-Render the main review list view
+Render the main review list view.
+
+@component
 */
 export default function Home() {
     const { filmsWithReviews } = useFilmReviewAppContext();
-    const [searchQueryFilmId, setSearchQueryFilmId] = useState<String | null>(
+    const [searchQueryFilmId, setSearchQueryFilmId] = useState<string | null>(
+        null
+    );
+    const [searchQueryGenres, setSearchQueryGenres] = useState<string[] | null>(
         null
     );
     const [reviewModalOpen, setReviewModalOpen] = useState<boolean>(false);
 
-    const displayReviews = searchQueryFilmId
+    // I've kept the filtering logic seperate here, just for readibility.
+    // filter by title
+    let displayReviews = searchQueryFilmId
         ? Array.from(filmsWithReviews.values()).filter(
               (review) => review.id === searchQueryFilmId
           )
         : Array.from(filmsWithReviews.values());
 
-    useEffect(() => {}, [filmsWithReviews]);
+    // filter by genre
+    displayReviews =
+        searchQueryGenres && searchQueryGenres.length !== 0
+            ? displayReviews.filter((review) => {
+                  return searchQueryGenres.every((genre) =>
+                      review.genres.includes(genre)
+                  );
+              })
+            : displayReviews;
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -59,12 +73,20 @@ export default function Home() {
             >
                 <div
                     id="filter-bar"
-                    className="w-full flex flex-col items-center py-4 sticky top-[100px] bg-white"
+                    className="w-full flex flex-col lg:flex-row justify-center items-center 
+                    py-4 sticky top-[100px] bg-mubi-light-grey gap-4 border-b-[1.2px] 
+                    border-mubi-grey"
                 >
-                    <div className="w-full md:w-2/3 xl:w-6/12 px-4">
-                        <SearchForm
+                    <div className="w-full md:w-2/3 xl:w-4/12 px-4">
+                        <TitleSearchBar
                             placeholder={"Search your review logs..."}
                             setSelectedFilmIdHandler={setSearchQueryFilmId}
+                        />
+                    </div>
+                    <div className="w-full md:w-2/3 xl:w-1/4 px-4">
+                        <GenreSearchBar
+                            placeholder={"Filter by genre..."}
+                            setSelectedGenresHandler={setSearchQueryGenres}
                         />
                     </div>
                 </div>
